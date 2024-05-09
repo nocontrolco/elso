@@ -20,11 +20,8 @@ add_library(
     SHARED
 
         # utils
-        calculators.cpp
-        calculators.hpp
         types.cpp
         types.hpp
-        parsers.hpp
         includes.hpp
         definitions.hpp
         math.hpp
