@@ -1,0 +1,55 @@
+name: build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x' 
+
+    - name: Cache conda environment
+      uses: actions/cache@v3
+      env:
+        # Increase this value to reset cache if environment.yml has not changed
+        CACHE_NUMBER: 0
+      with:
+        path: ~/conda_pkgs_dir
+        key:
+          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
+   
+    - uses: conda-incubator/setup-miniconda@v2      
+      with:
+        miniconda-version: "latest"
+        activate-environment: elso
+        channel-priority: strict
+        environment-file: environment.yml
+        python-version: 3.11
+        show-channel-urls: true
+        use-only-tar-bz2: true
+
+    - name: Update conda environment if cache does not exist
+      run:
+        conda env update --file environment.yml --prune
+      if: steps.cache.outputs.cache-hit != 'true'
+        
+    - name: Test and build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build . --config Release --target all -- -j 10
+        cd tests/cpp
+        ctest -V --output-on-failure
+        pytest ../../../tests/python -v
