@@ -15,3 +15,16 @@ try:
     import libelso_bindings as _elso
 except:
     print("ELSO bindings libraries not generated!")
+
+# Definitions
+real2 = _elso.real2
+
+# Type
+Ball = _elso.Ball
+BoundingBox = _elso.BoundingBox
+Car = _elso.Car
+Arena = _elso.Arena
+
+# Solver
+MatchStatus = _elso.MatchStatus
+Model = _elso.Model

@@ -18,3 +18,6 @@ struct is_pod
 };
 
 static_assert(sizeof(real) == 4, "Real type must be 32 bits");
+
+struct real2 { real x, y; };
+struct real3 { real x, y, z; };

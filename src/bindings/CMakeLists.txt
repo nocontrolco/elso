@@ -20,4 +20,5 @@ target_link_libraries(
         pybind11::module
     PRIVATE
         elso_utils
+        elso_physics
 )

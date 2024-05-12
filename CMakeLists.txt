@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Core C++ libraries
 add_subdirectory(src/cpp/utils)
+add_subdirectory(src/cpp/physics)
 
 # Bindings libraries
 add_subdirectory(src/bindings)

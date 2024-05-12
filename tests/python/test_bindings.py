@@ -12,5 +12,13 @@ def testBasicBinding():
     """
 
     assert [f for f in dir(elso) if not f.startswith("_")] == sorted(
-        []
+        [
+            'Arena',
+            'Ball',
+            'BoundingBox',
+            'Car',
+            'MatchStatus',
+            'Model',
+            'real2',
+        ]
     )
