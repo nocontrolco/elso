@@ -19,7 +19,7 @@ PYBIND11_MODULE(libelso_bindings, m)
             ;
     }
 
-    // Type --------------------------------------------------------------------------------------
+    // Types -------------------------------------------------------------------------------------
     {
         using namespace type;
 
@@ -27,6 +27,7 @@ PYBIND11_MODULE(libelso_bindings, m)
             .def(py::init<>())
             .def_readwrite("radius", &Ball::_radius)
             .def_readwrite("virtual_mass", &Ball::_virtual_mass)
+            .def_readwrite("gravity_center", &Ball::_gravity_center)
             ;
         
         py::class_<BoundingBox, std::shared_ptr<BoundingBox>>(m, "BoundingBox")
@@ -38,7 +39,7 @@ PYBIND11_MODULE(libelso_bindings, m)
         py::class_<Car, std::shared_ptr<Car>>(m, "Car")
             .def(py::init<>())
             .def_readwrite("hitbox", &Car::_hitbox)
-            .def_readwrite("wheel_radius", &Car::_wheel_radius)
+            .def_readwrite("levitation_height", &Car::_levitation_height)
             .def_readwrite("virtual_mass", &Car::_virtual_mass)
             .def_readwrite("gravity_center", &Car::_gravity_center)
             ;
@@ -70,7 +71,8 @@ PYBIND11_MODULE(libelso_bindings, m)
             .def_readwrite("ball", &Model::_ball)
             .def_readwrite("current_time", &Model::_current_time)
             .def_readwrite("status", &Model::_status)
-            .def("Run", &Model::Run)
+            .def("Setup", &Model::setup)
+            .def("Run", &Model::run, py::arg("output_frequency") = 0.0)
             ;
     }
 }
