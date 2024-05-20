@@ -6,6 +6,9 @@
 typedef double real;
 typedef float real_32;
 
+const double ELSO_TOL = 1e-10;
+const double MAX_VELOCITY = 1e-10;
+
 /**
  * @brief Checks if a type is a POD (Plain Old Data) type
  *

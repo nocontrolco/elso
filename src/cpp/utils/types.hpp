@@ -17,6 +17,7 @@ namespace elso::type
         // Inertia properties
         real _virtual_mass { 5000.0 };
         real2 _gravity_center { 0.0, 0.0 };
+        real2 _velocity { 0.0, 0.0 };
 
         void move(const real2& linear_acceleration, const real dt);
     };
@@ -40,7 +41,6 @@ namespace elso::type
 
     struct Arena
     {
-        BoundingBox _bbox { { 0.0, 0.0 }, { 20.0, 20.0 } };
-        real _corner_arc;
+        BoundingBox _bbox { ._min = { 0.0, 0.0 }, ._max = { 20.0, 20.0 } };
     };
 } // namespace elso::type

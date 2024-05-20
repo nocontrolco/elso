@@ -28,6 +28,7 @@ PYBIND11_MODULE(libelso_bindings, m)
             .def_readwrite("radius", &Ball::_radius)
             .def_readwrite("virtual_mass", &Ball::_virtual_mass)
             .def_readwrite("gravity_center", &Ball::_gravity_center)
+            .def_readwrite("velocity", &Ball::_velocity)
             ;
         
         py::class_<BoundingBox, std::shared_ptr<BoundingBox>>(m, "BoundingBox")
@@ -47,7 +48,6 @@ PYBIND11_MODULE(libelso_bindings, m)
         py::class_<Arena, std::shared_ptr<Arena>>(m, "Arena")
             .def(py::init<>())
             .def_readwrite("bbox", &Arena::_bbox)
-            .def_readwrite("corner_arc", &Arena::_corner_arc)
             ;
     }
 
@@ -72,7 +72,7 @@ PYBIND11_MODULE(libelso_bindings, m)
             .def_readwrite("current_time", &Model::_current_time)
             .def_readwrite("status", &Model::_status)
             .def("Setup", &Model::setup)
-            .def("Run", &Model::run, py::arg("output_frequency") = 0.0)
+            .def("Run", &Model::run, py::arg("simulation_time"), py::arg("output_frequency") = 0.0)
             ;
     }
 }

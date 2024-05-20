@@ -22,6 +22,8 @@ add_library(
         # physics
         solver.cpp
         solver.hpp
+
+        models.hpp
 )
 target_link_libraries(
     elso_physics

@@ -20,6 +20,8 @@ namespace elso::solver
         // World parameters
         const real2 _gravity { .x = 0.0, .y = -9.81 };
         const real _timestep { 5e-5 }; // 0.0005s per iteration
+        const real _stiffness { 1.0e5 };
+        const real _damping { 1.0e3 };
         type::Arena _arena { };
 
         // Moving Agents
@@ -31,9 +33,12 @@ namespace elso::solver
         // Game scalars: the first id always refer to the ball
         std::vector<real2> forces;
 
-        // Methods
+        // Public Methods
         void setup();
-        bool run(real output_frequency = 0.0);
+        bool run(real simulation_time, real output_frequency = 0.0);
+
+        // Private Methods
+        void ball_arena_interaction();
     };
 
 } // namespace elso::solver
