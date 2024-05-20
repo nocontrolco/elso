@@ -11,8 +11,15 @@ namespace elso::type
 {
     struct Ball
     {
-        real _radius;
-        real _virtual_mass;
+        // Shape
+        real _radius { 1.5 };
+
+        // Inertia properties
+        real _virtual_mass { 5000.0 };
+        real2 _gravity_center { 0.0, 0.0 };
+        real2 _velocity { 0.0, 0.0 };
+
+        void move(const real2& linear_acceleration, const real dt);
     };
 
     struct BoundingBox
@@ -23,9 +30,9 @@ namespace elso::type
 
     struct Car
     {
-        // Shape: hitbox & wheels
+        // Shape: hitbox & levitation height
         BoundingBox _hitbox;
-        real _wheel_radius;
+        real _levitation_height;
 
         // Inertia properties
         real _virtual_mass;
@@ -34,7 +41,6 @@ namespace elso::type
 
     struct Arena
     {
-        BoundingBox _bbox;
-        real _corner_arc;
+        BoundingBox _bbox { ._min = { 0.0, 0.0 }, ._max = { 20.0, 20.0 } };
     };
 } // namespace elso::type

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.5.0)
 project(elso_bindings LANGUAGES CXX)
 
 find_package(Python 3.10 COMPONENTS Interpreter Development REQUIRED)
